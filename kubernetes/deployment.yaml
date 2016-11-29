@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cotoami
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: cotoami
+    spec:
+      containers:
+      - name: cotoami
+        image: cotoami/cotoami:422e1dd8653023eb10c2f9676e1c446a0f1b8d65
+        ports:
+        - containerPort: 80

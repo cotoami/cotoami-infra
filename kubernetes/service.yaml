@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cotoami
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  type: LoadBalancer
+  selector:
+    app: cotoami
