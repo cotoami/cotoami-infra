@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
       - name: cotoami
-        image: cotoami/cotoami:422e1dd8653023eb10c2f9676e1c446a0f1b8d65
+        image: cotoami/cotoami:0fd9b63bbd7760392696a06b424a1fe49bd42b34
         ports:
         - containerPort: 80
