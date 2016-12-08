@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cotoami
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  type: LoadBalancer
+  selector:
+    app: cotoami
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cotoami
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: cotoami
+    spec:
+      containers:
+      - name: cotoami
+        image: cotoami/cotoami:d24a25dbe74ef18af1b231cd6b24854b81d9b87c
+        env:
+        - name: COTOAMI_REDIS_HOST
+          value: redis-master
+        ports:
+        - containerPort: 80
