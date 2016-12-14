@@ -27,5 +27,25 @@ spec:
         env:
         - name: COTOAMI_REDIS_HOST
           value: redis-master
+        - name: COTOAMI_REPO_HOST
+          valueFrom:
+            secretKeyRef:
+              name: cotoami-secret
+              key: repo_host
+        - name: COTOAMI_REPO_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: cotoami-secret
+              key: repo_database
+        - name: COTOAMI_REPO_USER
+          valueFrom:
+            secretKeyRef:
+              name: cotoami-secret
+              key: repo_user
+        - name: COTOAMI_REPO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cotoami-secret
+              key: repo_password
         ports:
         - containerPort: 80
