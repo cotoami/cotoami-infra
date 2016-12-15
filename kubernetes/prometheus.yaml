@@ -92,7 +92,7 @@ data:
       - action: labelmap
         regex: __meta_kubernetes_node_label_(.+)
     - job_name: 'kubernetes-service-endpoints'
-      scheme: https
+      scheme: http
       kubernetes_sd_configs:
       - api_servers:
         - 'https://kubernetes.default.svc'
@@ -124,7 +124,7 @@ data:
         action: replace
         target_label: kubernetes_name
     - job_name: 'kubernetes-services'
-      scheme: https
+      scheme: http
       metrics_path: /probe
       params:
         module: [http_2xx]
