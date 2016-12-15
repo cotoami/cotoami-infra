@@ -44,7 +44,7 @@
   },
   "refresh": "5s",
   "schemaVersion": 13,
-  "version": 3,
+  "version": 5,
   "links": [],
   "gnetId": null,
   "rows": [
@@ -196,7 +196,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "decbytes",
               "label": null,
               "logBase": 1,
               "max": null,
