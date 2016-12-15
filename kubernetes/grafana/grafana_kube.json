@@ -1,5 +1,5 @@
 {
-  "id": 2,
+  "id": 1,
   "title": "Kubernetes",
   "tags": [],
   "style": "dark",
@@ -8,7 +8,7 @@
   "sharedCrosshair": false,
   "hideControls": false,
   "time": {
-    "from": "now-6h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -42,8 +42,9 @@
   "annotations": {
     "list": []
   },
+  "refresh": "5s",
   "schemaVersion": 13,
-  "version": 1,
+  "version": 3,
   "links": [],
   "gnetId": null,
   "rows": [
@@ -57,7 +58,95 @@
           "editable": true,
           "error": false,
           "fill": 1,
-          "id": 1,
+          "id": 2,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "container_memory_usage_bytes{namespace=\"default\",container_name!=\"POD\"}",
+              "intervalFactor": 2,
+              "legendFormat": "{{pod_name}}",
+              "refId": "A",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Memory by containers in default",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "showTitle": false,
+      "titleSize": "h6",
+      "height": "250px",
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    },
+    {
+      "title": "Dashboard Row",
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 3,
           "legend": {
             "avg": false,
             "current": false,
@@ -81,17 +170,17 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "process_resident_memory_bytes",
+              "expr": "container_memory_usage_bytes{namespace=\"kube-system\",container_name!=\"POD\"}",
               "intervalFactor": 2,
-              "legendFormat": "{{instance}}",
+              "legendFormat": "{{pod_name}}",
               "refId": "A",
-              "step": 30
+              "step": 2
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Memory usage",
+          "title": "Memory by containers in kube-system",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -127,7 +216,18 @@
       ],
       "showTitle": false,
       "titleSize": "h6",
-      "height": "250px",
+      "height": 250,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    },
+    {
+      "title": "Dashboard Row",
+      "panels": [],
+      "showTitle": false,
+      "titleSize": "h6",
+      "height": 250,
       "repeat": null,
       "repeatRowId": null,
       "repeatIteration": null,
