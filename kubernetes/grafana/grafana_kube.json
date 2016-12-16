@@ -8,7 +8,7 @@
   "sharedCrosshair": false,
   "hideControls": false,
   "time": {
-    "from": "now-1h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {
@@ -44,7 +44,7 @@
   },
   "refresh": "5s",
   "schemaVersion": 13,
-  "version": 31,
+  "version": 42,
   "links": [],
   "gnetId": null,
   "rows": [
@@ -86,14 +86,14 @@
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemTotal",
               "refId": "A",
-              "step": 20
+              "step": 240
             },
             {
               "expr": "node_memory_MemAvailable{instance=\"172.20.39.130:9100\"}",
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemAvailable",
               "refId": "B",
-              "step": 20
+              "step": 240
             }
           ],
           "thresholds": [],
@@ -167,14 +167,14 @@
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemTotal",
               "refId": "A",
-              "step": 20
+              "step": 240
             },
             {
               "expr": "node_memory_MemAvailable{instance=\"172.20.119.226:9100\"}",
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemAvailable",
               "refId": "B",
-              "step": 20
+              "step": 240
             }
           ],
           "thresholds": [],
@@ -248,14 +248,14 @@
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemTotal",
               "refId": "A",
-              "step": 20
+              "step": 240
             },
             {
               "expr": "node_memory_MemAvailable{instance=\"172.20.36.209:9100\"}",
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemAvailable",
               "refId": "B",
-              "step": 20
+              "step": 240
             }
           ],
           "thresholds": [],
@@ -341,7 +341,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{pod_name}}",
               "refId": "A",
-              "step": 4
+              "step": 60
             }
           ],
           "thresholds": [],
@@ -417,7 +417,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{pod_name}}",
               "refId": "A",
-              "step": 4
+              "step": 60
             }
           ],
           "thresholds": [],
@@ -503,14 +503,14 @@
               "intervalFactor": 2,
               "legendFormat": "node_filesystem_avail",
               "refId": "A",
-              "step": 20
+              "step": 240
             },
             {
               "expr": "node_filesystem_size{instance=\"172.20.39.130:9100\",mountpoint=\"/\"}",
               "intervalFactor": 2,
               "legendFormat": "node_filesystem_size",
               "refId": "B",
-              "step": 20
+              "step": 240
             }
           ],
           "thresholds": [],
@@ -584,14 +584,14 @@
               "intervalFactor": 2,
               "legendFormat": "node_filesystem_avail",
               "refId": "A",
-              "step": 20
+              "step": 240
             },
             {
               "expr": "node_filesystem_size{instance=\"172.20.119.226:9100\",mountpoint=\"/\"}",
               "intervalFactor": 2,
               "legendFormat": "node_filesystem_size",
               "refId": "B",
-              "step": 20
+              "step": 240
             }
           ],
           "thresholds": [],
@@ -665,14 +665,14 @@
               "intervalFactor": 2,
               "legendFormat": "node_filesystem_avail",
               "refId": "A",
-              "step": 20
+              "step": 240
             },
             {
               "expr": "node_filesystem_size{instance=\"172.20.36.209:9100\",mountpoint=\"/\"}",
               "intervalFactor": 2,
               "legendFormat": "node_filesystem_size",
               "refId": "B",
-              "step": 20
+              "step": 240
             }
           ],
           "thresholds": [],
