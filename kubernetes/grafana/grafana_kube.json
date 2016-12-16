@@ -8,8 +8,8 @@
   "sharedCrosshair": false,
   "hideControls": false,
   "time": {
-    "from": "now-15m",
-    "to": "now"
+    "from": "2016-12-16T00:13:23.428Z",
+    "to": "2016-12-16T00:43:23.428Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -42,9 +42,9 @@
   "annotations": {
     "list": []
   },
-  "refresh": "5s",
+  "refresh": false,
   "schemaVersion": 13,
-  "version": 14,
+  "version": 30,
   "links": [],
   "gnetId": null,
   "rows": [
@@ -86,14 +86,14 @@
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemTotal",
               "refId": "A",
-              "step": 4
+              "step": 10
             },
             {
               "expr": "node_memory_MemAvailable{instance=\"172.20.39.130:9100\"}",
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemAvailable",
               "refId": "B",
-              "step": 4
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -167,14 +167,14 @@
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemTotal",
               "refId": "A",
-              "step": 4
+              "step": 10
             },
             {
               "expr": "node_memory_MemAvailable{instance=\"172.20.119.226:9100\"}",
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemAvailable",
               "refId": "B",
-              "step": 4
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -244,18 +244,18 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_MemTotal{instance=\"172.20.39.130:9100\"}",
+              "expr": "node_memory_MemTotal{instance=\"172.20.36.209:9100\"}",
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemTotal",
               "refId": "A",
-              "step": 4
+              "step": 10
             },
             {
-              "expr": "node_memory_MemAvailable{instance=\"172.20.39.130:9100\"}",
+              "expr": "node_memory_MemAvailable{instance=\"172.20.36.209:9100\"}",
               "intervalFactor": 2,
               "legendFormat": "node_memory_MemAvailable",
               "refId": "B",
-              "step": 4
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -460,6 +460,261 @@
       "showTitle": false,
       "titleSize": "h6",
       "height": 363,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    },
+    {
+      "title": "Dashboard Row",
+      "panels": [
+        {
+          "id": 7,
+          "title": "File system on master",
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "graph",
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "node_filesystem_avail{instance=\"172.20.39.130:9100\",mountpoint=\"/\"}",
+              "intervalFactor": 2,
+              "step": 10,
+              "legendFormat": "node_filesystem_avail"
+            },
+            {
+              "expr": "node_filesystem_size{instance=\"172.20.39.130:9100\",mountpoint=\"/\"}",
+              "intervalFactor": 2,
+              "refId": "B",
+              "step": 10,
+              "legendFormat": "node_filesystem_size"
+            }
+          ],
+          "datasource": "prometheus",
+          "renderer": "flot",
+          "yaxes": [
+            {
+              "label": null,
+              "show": true,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "decbytes"
+            },
+            {
+              "label": null,
+              "show": true,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "short"
+            }
+          ],
+          "xaxis": {
+            "show": true,
+            "mode": "time",
+            "name": null,
+            "values": []
+          },
+          "lines": true,
+          "fill": 1,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "individual",
+            "shared": true,
+            "sort": 0,
+            "msResolution": false
+          },
+          "timeFrom": null,
+          "timeShift": null,
+          "aliasColors": {},
+          "seriesOverrides": [],
+          "thresholds": [],
+          "links": []
+        },
+        {
+          "id": 8,
+          "title": "File system on node1",
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "graph",
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "node_filesystem_avail{instance=\"172.20.119.226:9100\",mountpoint=\"/\"}",
+              "intervalFactor": 2,
+              "step": 10,
+              "legendFormat": "node_filesystem_avail"
+            },
+            {
+              "expr": "node_filesystem_size{instance=\"172.20.119.226:9100\",mountpoint=\"/\"}",
+              "intervalFactor": 2,
+              "refId": "B",
+              "step": 10,
+              "legendFormat": "node_filesystem_size"
+            }
+          ],
+          "datasource": "prometheus",
+          "renderer": "flot",
+          "yaxes": [
+            {
+              "label": null,
+              "show": true,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "decbytes"
+            },
+            {
+              "label": null,
+              "show": true,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "short"
+            }
+          ],
+          "xaxis": {
+            "show": true,
+            "mode": "time",
+            "name": null,
+            "values": []
+          },
+          "lines": true,
+          "fill": 1,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "individual",
+            "shared": true,
+            "sort": 0,
+            "msResolution": false
+          },
+          "timeFrom": null,
+          "timeShift": null,
+          "aliasColors": {},
+          "seriesOverrides": [],
+          "thresholds": [],
+          "links": []
+        },
+        {
+          "id": 9,
+          "title": "File system on node2",
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "graph",
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "node_filesystem_avail{instance=\"172.20.36.209:9100\",mountpoint=\"/\"}",
+              "intervalFactor": 2,
+              "step": 10,
+              "legendFormat": "node_filesystem_avail"
+            },
+            {
+              "expr": "node_filesystem_size{instance=\"172.20.36.209:9100\",mountpoint=\"/\"}",
+              "intervalFactor": 2,
+              "refId": "B",
+              "step": 10,
+              "legendFormat": "node_filesystem_size"
+            }
+          ],
+          "datasource": "prometheus",
+          "renderer": "flot",
+          "yaxes": [
+            {
+              "label": null,
+              "show": true,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "decbytes"
+            },
+            {
+              "label": null,
+              "show": true,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "short"
+            }
+          ],
+          "xaxis": {
+            "show": true,
+            "mode": "time",
+            "name": null,
+            "values": []
+          },
+          "lines": true,
+          "fill": 1,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "individual",
+            "shared": true,
+            "sort": 0,
+            "msResolution": false
+          },
+          "timeFrom": null,
+          "timeShift": null,
+          "aliasColors": {},
+          "seriesOverrides": [],
+          "thresholds": [],
+          "links": []
+        }
+      ],
+      "showTitle": false,
+      "titleSize": "h6",
+      "height": 252,
       "repeat": null,
       "repeatRowId": null,
       "repeatIteration": null,
