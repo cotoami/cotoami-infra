@@ -47,5 +47,15 @@ spec:
             secretKeyRef:
               name: cotoami-secret
               key: repo_password
+        - name: COTOAMI_SMTP_USER
+          valueFrom:
+            secretKeyRef:
+              name: cotoami-secret
+              key: smtp_user
+        - name: COTOAMI_SMTP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cotoami-secret
+              key: smtp_password
         ports:
         - containerPort: 80
