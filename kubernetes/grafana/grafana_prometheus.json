@@ -44,7 +44,7 @@
   },
   "refresh": "1m",
   "schemaVersion": 13,
-  "version": 7,
+  "version": 13,
   "links": [],
   "gnetId": null,
   "rows": [
@@ -52,78 +52,78 @@
       "title": "Dashboard Row",
       "panels": [
         {
-          "id": 1,
-          "title": "Chunks in memory",
-          "error": false,
-          "span": 12,
-          "editable": true,
-          "type": "graph",
-          "targets": [
-            {
-              "refId": "A",
-              "expr": "prometheus_local_storage_memory_chunks",
-              "intervalFactor": 2,
-              "step": 120,
-              "legendFormat": "chunks"
-            }
-          ],
+          "aliasColors": {},
+          "bars": false,
           "datasource": "prometheus",
-          "renderer": "flot",
-          "yaxes": [
-            {
-              "label": null,
-              "show": true,
-              "logBase": 1,
-              "min": null,
-              "max": null,
-              "format": "short"
-            },
-            {
-              "label": null,
-              "show": true,
-              "logBase": 1,
-              "min": null,
-              "max": null,
-              "format": "short"
-            }
-          ],
-          "xaxis": {
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 1,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
             "show": true,
-            "mode": "time",
-            "name": null,
-            "values": []
+            "total": false,
+            "values": false
           },
           "lines": true,
-          "fill": 1,
           "linewidth": 1,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
-            "current": false,
-            "total": false,
-            "avg": false
-          },
+          "links": [],
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "individual",
-            "shared": true,
-            "sort": 0,
-            "msResolution": false
-          },
+          "targets": [
+            {
+              "expr": "prometheus_local_storage_memory_chunks",
+              "intervalFactor": 2,
+              "legendFormat": "chunks",
+              "refId": "A",
+              "step": 120
+            }
+          ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "aliasColors": {},
-          "seriesOverrides": [],
-          "thresholds": [],
-          "links": []
+          "title": "Chunks in memory",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
         }
       ],
       "showTitle": false,
@@ -138,78 +138,78 @@
       "title": "Dashboard Row",
       "panels": [
         {
-          "id": 2,
-          "title": "Container memory  usage",
-          "error": false,
-          "span": 12,
-          "editable": true,
-          "type": "graph",
-          "targets": [
-            {
-              "refId": "A",
-              "expr": "container_memory_usage_bytes{namespace=\"default\",container_name=\"prometheus\"}",
-              "intervalFactor": 2,
-              "step": 120,
-              "legendFormat": "container_memory_usage_bytes"
-            }
-          ],
+          "aliasColors": {},
+          "bars": false,
           "datasource": "prometheus",
-          "renderer": "flot",
-          "yaxes": [
-            {
-              "label": null,
-              "show": true,
-              "logBase": 1,
-              "min": null,
-              "max": null,
-              "format": "decbytes"
-            },
-            {
-              "label": null,
-              "show": true,
-              "logBase": 1,
-              "min": null,
-              "max": null,
-              "format": "short"
-            }
-          ],
-          "xaxis": {
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 2,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
             "show": true,
-            "mode": "time",
-            "name": null,
-            "values": []
+            "total": false,
+            "values": false
           },
           "lines": true,
-          "fill": 1,
           "linewidth": 1,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
-            "current": false,
-            "total": false,
-            "avg": false
-          },
+          "links": [],
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "individual",
-            "shared": true,
-            "sort": 0,
-            "msResolution": false
-          },
+          "targets": [
+            {
+              "expr": "container_memory_usage_bytes{namespace=\"default\",container_name=\"prometheus\"}",
+              "intervalFactor": 2,
+              "legendFormat": "container_memory_usage_bytes",
+              "refId": "A",
+              "step": 120
+            }
+          ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "aliasColors": {},
-          "seriesOverrides": [],
-          "thresholds": [],
-          "links": []
+          "title": "Container memory  usage",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
         }
       ],
       "showTitle": false,
@@ -224,78 +224,78 @@
       "title": "Dashboard Row",
       "panels": [
         {
-          "id": 3,
-          "title": "Process memory usage",
-          "error": false,
-          "span": 12,
-          "editable": true,
-          "type": "graph",
-          "targets": [
-            {
-              "refId": "A",
-              "expr": "process_resident_memory_bytes{instance=\"localhost:9090\",job=\"prometheus\"}",
-              "intervalFactor": 2,
-              "step": 120,
-              "legendFormat": "process_resident_memory_bytes"
-            }
-          ],
+          "aliasColors": {},
+          "bars": false,
           "datasource": "prometheus",
-          "renderer": "flot",
-          "yaxes": [
-            {
-              "label": null,
-              "show": true,
-              "logBase": 1,
-              "min": null,
-              "max": null,
-              "format": "short"
-            },
-            {
-              "label": null,
-              "show": true,
-              "logBase": 1,
-              "min": null,
-              "max": null,
-              "format": "short"
-            }
-          ],
-          "xaxis": {
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 3,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
             "show": true,
-            "mode": "time",
-            "name": null,
-            "values": []
+            "total": false,
+            "values": false
           },
           "lines": true,
-          "fill": 1,
           "linewidth": 1,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "percentage": false,
-          "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
-            "current": false,
-            "total": false,
-            "avg": false
-          },
+          "links": [],
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "individual",
-            "shared": true,
-            "sort": 0,
-            "msResolution": false
-          },
+          "targets": [
+            {
+              "expr": "process_resident_memory_bytes{instance=\"localhost:9090\",job=\"prometheus\"}",
+              "intervalFactor": 2,
+              "legendFormat": "process_resident_memory_bytes",
+              "refId": "A",
+              "step": 120
+            }
+          ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "aliasColors": {},
-          "seriesOverrides": [],
-          "thresholds": [],
-          "links": []
+          "title": "Process memory usage",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
         }
       ],
       "showTitle": false,
