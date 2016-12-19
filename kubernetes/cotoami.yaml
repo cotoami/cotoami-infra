@@ -25,6 +25,8 @@ spec:
       - name: cotoami
         image: cotoami/cotoami:d24a25dbe74ef18af1b231cd6b24854b81d9b87c
         env:
+        - name: COTOAMI_URL_PREFIX
+          value: http://cotoa.me
         - name: COTOAMI_REDIS_HOST
           value: redis-master
         - name: COTOAMI_REPO_HOST
