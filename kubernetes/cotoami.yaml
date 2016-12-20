@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: cotoami
-        image: cotoami/cotoami:d24a25dbe74ef18af1b231cd6b24854b81d9b87c
+        image: cotoami/cotoami:4996094c8a6fca6758c2eb4b97cfdc1640a8144f
         env:
         - name: COTOAMI_URL_PREFIX
           value: http://cotoa.me
