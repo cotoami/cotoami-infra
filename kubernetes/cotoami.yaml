@@ -2,13 +2,17 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cotoami
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:ap-northeast-1:207588786415:certificate/ad07312b-d416-4a53-8031-49e3ce78cd0f"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
 spec:
-  ports:
-  - port: 80
-    protocol: TCP
-  type: LoadBalancer
   selector:
     app: cotoami
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 443
+    targetPort: 80
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -23,7 +27,7 @@ spec:
     spec:
       containers:
       - name: cotoami
-        image: cotoami/cotoami:4996094c8a6fca6758c2eb4b97cfdc1640a8144f
+        image: cotoami/cotoami:a80b7ed972141ac19e99099351bac91cba244373
         env:
         - name: COTOAMI_EMAIL_FROM
           value: no-reply@cotoa.me
