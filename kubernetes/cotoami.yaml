@@ -31,8 +31,6 @@ spec:
         env:
         - name: COTOAMI_EMAIL_FROM
           value: no-reply@cotoa.me
-        - name: COTOAMI_URL_PREFIX
-          value: http://cotoa.me
         - name: COTOAMI_REDIS_HOST
           value: redis-master
         - name: COTOAMI_REPO_HOST
