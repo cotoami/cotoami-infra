@@ -180,4 +180,4 @@ data:
         target_label: kubernetes_pod_name
     - job_name: 'cotoami'
       static_configs:
-        - targets: ['cotoami:80']
+        - targets: ['cotoami:443']
