@@ -31,7 +31,8 @@ spec:
         args:
         - "-config.file=/etc/prometheus/prometheus.yml"
         - "-storage.local.path=/prometheus"
-        - "-storage.local.retention=24h"
+        - "-storage.local.retention=72h"
+        - "-storage.local.memory-chunks=524288"
         ports:
         - containerPort: 9090
           protocol: TCP
@@ -61,7 +62,7 @@ metadata:
 data:
   prometheus.yml: |
     global:
-      scrape_interval: 10s
+      scrape_interval: 1m
       scrape_timeout: 10s
     scrape_configs:
     - job_name: 'prometheus'
