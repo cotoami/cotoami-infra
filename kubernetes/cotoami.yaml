@@ -29,6 +29,12 @@ spec:
       - name: cotoami
         image: cotoami/cotoami:a80b7ed972141ac19e99099351bac91cba244373
         env:
+        - name: COTOAMI_URL_SCHEME
+          value: https
+        - name: COTOAMI_URL_HOST
+          value: cotoa.me
+        - name: COTOAMI_URL_PORT
+          value: "443"
         - name: COTOAMI_EMAIL_FROM
           value: no-reply@cotoa.me
         - name: COTOAMI_REDIS_HOST
