@@ -1,0 +1,187 @@
+#
+# postgres
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+    tier: backend
+spec:
+  selector:
+    app: postgres
+    tier: backend
+  ports:
+  - port: 5432
+    targetPort: 5432
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres
+        tier: backend
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:alpine
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        - name: POSTGRES_DB
+          value: cotoami
+---
+#
+# maildev
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: maildev
+  labels:
+    app: maildev
+    tier: backend
+spec:
+  selector:
+    app: maildev
+    tier: backend
+  type: NodePort
+  ports:
+  - name: web
+    port: 80
+    targetPort: 80
+  - name: mail
+    port: 25
+    targetPort: 25
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: maildev
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: maildev
+        tier: backend
+    spec:
+      containers:
+      - name: maildev
+        image: djfarrelly/maildev:latest
+        ports:
+        - containerPort: 80
+        - containerPort: 25
+---
+#
+# redis
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-master
+  labels:
+    app: redis
+    tier: backend
+    role: master
+spec:
+  selector:
+    app: redis
+    tier: backend
+    role: master
+  ports:
+  - port: 6379
+    targetPort: 6379
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis-master
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+        tier: backend
+        role: master
+    spec:
+      containers:
+      - name: master
+        image: redis
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 6379
+---
+#
+# cotoami
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: cotoami
+spec:
+  selector:
+    app: cotoami
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cotoami
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cotoami
+    spec:
+      containers:
+      - name: cotoami
+        image: cotoami/cotoami:2af285b288a0ee0755c30a3133150522c320fce4
+        env:
+        - name: COTOAMI_URL_SCHEME
+          value: http
+        - name: COTOAMI_URL_HOST
+          value: cotoami
+        - name: COTOAMI_URL_PORT
+          value: "80"
+        - name: COTOAMI_EMAIL_FROM
+          value: no-reply@example.com
+        - name: COTOAMI_REDIS_HOST
+          value: redis-master
+        - name: COTOAMI_REPO_HOST
+          value: postgres
+        - name: COTOAMI_REPO_DATABASE
+          value: cotoami
+        - name: COTOAMI_REPO_USER
+          value: postgres
+        - name: COTOAMI_REPO_PASSWORD
+          value: postgres
+        - name: COTOAMI_SMTP_SERVER
+          value: maildev
+        - name: COTOAMI_SMTP_PORT
+          value: "25"
+        - name: COTOAMI_SMTP_USER
+          value: 
+        - name: COTOAMI_SMTP_PASSWORD
+          value: 
+        ports:
+        - containerPort: 80
