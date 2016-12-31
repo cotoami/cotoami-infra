@@ -20,6 +20,7 @@ metadata:
   name: cotoami
 spec:
   replicas: 2
+  revisionHistoryLimit: 2
   template:
     metadata:
       labels:
@@ -27,7 +28,7 @@ spec:
     spec:
       containers:
       - name: cotoami
-        image: cotoami/cotoami:a80b7ed972141ac19e99099351bac91cba244373
+        image: cotoami/cotoami:77fcc5a3dbbf8183e8c1013fb6023f4327cf03f8
         env:
         - name: COTOAMI_URL_SCHEME
           value: https
