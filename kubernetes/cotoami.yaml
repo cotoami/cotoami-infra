@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: cotoami
-        image: cotoami/cotoami:77fcc5a3dbbf8183e8c1013fb6023f4327cf03f8
+        image: cotoami/cotoami:18307c9e2c8ebe3780cd5ef610fa4d295a0e0815
         env:
         - name: COTOAMI_URL_SCHEME
           value: https
