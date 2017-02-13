@@ -155,7 +155,7 @@ spec:
     spec:
       containers:
       - name: cotoami
-        image: cotoami/cotoami:2af285b288a0ee0755c30a3133150522c320fce4
+        image: cotoami/cotoami:4fa3156297a30372dfe01e1a9c9e796c4e1ba592
         env:
         - name: COTOAMI_URL_SCHEME
           value: http
