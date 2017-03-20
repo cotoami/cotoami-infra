@@ -28,7 +28,7 @@ resource "aws_route53_record" "www" {
   name = "cotoa.me"
   type = "A"
   alias {
-    name = "a041c7908c92211e69a1906001d7b1fb-906384712.ap-northeast-1.elb.amazonaws.com"
+    name = "cotoami-633529141.ap-northeast-1.elb.amazonaws.com"
     zone_id = "Z14GRHDCWA56QT"
     evaluate_target_health = true
   }
