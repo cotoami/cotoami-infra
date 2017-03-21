@@ -19,7 +19,7 @@ kind: Deployment
 metadata:
   name: cotoami
 spec:
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 2
   template:
     metadata:
@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: cotoami
-        image: cotoami/cotoami:18307c9e2c8ebe3780cd5ef610fa4d295a0e0815
+        image: cotoami/cotoami:ed6682bb0d308cf28ce7879f847fdf555830aa59
         env:
         - name: COTOAMI_URL_SCHEME
           value: https
