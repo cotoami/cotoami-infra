@@ -66,7 +66,7 @@ resource "aws_alb_listener" "cotoami_https" {
 
 resource "aws_alb_target_group" "cotoami" {
   name = "cotoami"
-  port = 32148
+  port = 30000
   protocol = "HTTP"
   vpc_id = "${var.vpc_id}"
 }

@@ -2,17 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cotoami
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:ap-northeast-1:207588786415:certificate/ad07312b-d416-4a53-8031-49e3ce78cd0f"
-    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
 spec:
   selector:
     app: cotoami
-  type: LoadBalancer
+  type: NodePort
   ports:
   - protocol: TCP
-    port: 443
+    port: 80
     targetPort: 80
+    nodePort: 30000
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
