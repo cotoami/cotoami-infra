@@ -69,4 +69,12 @@ resource "aws_alb_target_group" "cotoami" {
   port = 30000
   protocol = "HTTP"
   vpc_id = "${var.vpc_id}"
+  
+  health_check {
+    interval = 30
+    path = "/api/public"
+    timeout = 20
+    healthy_threshold = 3
+    unhealthy_threshold = 2
+  }
 }

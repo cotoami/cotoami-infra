@@ -26,7 +26,18 @@ spec:
     spec:
       containers:
       - name: cotoami
-        image: cotoami/cotoami:ed6682bb0d308cf28ce7879f847fdf555830aa59
+        image: cotoami/cotoami:f919769fa76c353c023694d94987a2da53f95668
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /api/public
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          timeoutSeconds: 20
+          successThreshold: 3
+          failureThreshold: 2
         env:
         - name: COTOAMI_URL_SCHEME
           value: https
@@ -72,5 +83,4 @@ spec:
             secretKeyRef:
               name: cotoami-secret
               key: smtp_password
-        ports:
-        - containerPort: 80
+        
