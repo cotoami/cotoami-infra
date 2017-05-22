@@ -72,7 +72,7 @@ resource "aws_alb_target_group" "cotoami" {
   
   health_check {
     interval = 30
-    path = "/api/public"
+    path = "/health_check"
     timeout = 20
     healthy_threshold = 3
     unhealthy_threshold = 2

@@ -25,19 +25,28 @@ spec:
         app: cotoami
     spec:
       containers:
-      - name: cotoami
-        image: cotoami/cotoami:f919769fa76c353c023694d94987a2da53f95668
+      - name: nginx-proxy
+        image: cotoami/cotoami-nginx:latest
         ports:
         - containerPort: 80
+        env:
+        - name: APP_SERVER_PORT
+          value: "4000"
+        - name: ELB_CIDR
+          value: 172.20.0.0/16
         readinessProbe:
           httpGet:
-            path: /api/public
+            path: /health_check
             port: 80
           initialDelaySeconds: 10
           periodSeconds: 30
           timeoutSeconds: 20
-          successThreshold: 3
+          successThreshold: 1
           failureThreshold: 2
+      - name: cotoami
+        image: cotoami/cotoami:1e13fcd0cc4a3918569a12fc78198308f3988125
+        ports:
+        - containerPort: 4000
         env:
         - name: COTOAMI_URL_SCHEME
           value: https
