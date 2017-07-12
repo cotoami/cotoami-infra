@@ -44,7 +44,7 @@ spec:
           successThreshold: 1
           failureThreshold: 2
       - name: cotoami
-        image: cotoami/cotoami:1e13fcd0cc4a3918569a12fc78198308f3988125
+        image: cotoami/cotoami:e0230ddd3bb685cb268a5e5c407e64384e00ecb6
         ports:
         - containerPort: 4000
         env:
@@ -92,4 +92,3 @@ spec:
             secretKeyRef:
               name: cotoami-secret
               key: smtp_password
-        
