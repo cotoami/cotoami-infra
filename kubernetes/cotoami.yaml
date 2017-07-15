@@ -44,10 +44,12 @@ spec:
           successThreshold: 1
           failureThreshold: 2
       - name: cotoami
-        image: cotoami/cotoami:e0230ddd3bb685cb268a5e5c407e64384e00ecb6
+        image: cotoami/cotoami:latest
         ports:
         - containerPort: 4000
         env:
+        - name: INCREMENT_THIS_TO_FORCE_UPDATE
+          value: "1"
         - name: COTOAMI_URL_SCHEME
           value: https
         - name: COTOAMI_URL_HOST
