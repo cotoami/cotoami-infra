@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: prod-monitoring
+spec:
+  selector:
+    app: grafana
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+    nodePort: 30003
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: prod-monitoring
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana:4.3.2
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 3000
+        env:
+          # The following env variables are required to make Grafana accessible via
+          # the kubernetes api-server proxy. On production clusters, we recommend
+          # removing these env variables, setup auth for grafana, and expose the grafana
+          # service using a LoadBalancer or a public IP.
+          - name: GF_AUTH_BASIC_ENABLED
+            value: "false"
+          - name: GF_AUTH_ANONYMOUS_ENABLED
+            value: "true"
+          - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+            value: Admin
+        volumeMounts:
+        - name: grafana-persistent-storage
+          mountPath: /var
+
+      - name: grafana-import-dashboards
+        image: docker
+        command: ["/bin/sh", "-c"]
+        workingDir: /opt/grafana-dashboards
+        args:
+          # FIXME use kubernetes probe instead of "until curl"
+          - >
+            apk --update add curl ;
+            until $(curl --silent --fail --show-error --output /dev/null http://localhost:3000/api/datasources); do
+              printf '.' ; sleep 1 ;
+            done ;
+            for file in *-datasource.json ; do
+              if [ -e "$file" ] ; then
+                echo "importing $file" &&
+                curl --silent --fail --show-error \
+                  --request POST http://localhost:3000/api/datasources \
+                  --header "Content-Type: application/json" \
+                  --data-binary "@$file" ;
+                echo "" ;
+              fi
+            done ;
+            for file in *-dashboard.json ; do
+              if [ -e "$file" ] ; then
+                # wrap exported Grafana dashboard into valid json
+                echo "importing $file" &&
+                (echo '{"dashboard":';cat "$file";echo ',"inputs":[{"name":"DS_PROMETHEUS","pluginId":"prometheus","type":"datasource","value":"prometheus"}]}') | curl --silent --fail --show-error \
+                  --request POST http://localhost:3000/api/dashboards/import \
+                  --header "Content-Type: application/json" \
+                  --data-binary @-;
+                echo "" ;
+              fi
+            done ;
+            while true; do
+              sleep 1m ;
+            done
+        volumeMounts:
+          - name: config-volume
+            mountPath: /opt/grafana-dashboards
+
+      volumes:
+      - name: config-volume
+        configMap:
+          name: grafana-dashboards
+      - name: grafana-persistent-storage
+        emptyDir: {}

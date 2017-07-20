@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/scrape: 'true'
+  labels:
+    app: node-exporter
+    name: node-exporter
+  name: node-exporter
+  namespace: prod-monitoring
+spec:
+  clusterIP: None
+  ports:
+  - name: scrape
+    port: 9100
+    protocol: TCP
+  selector:
+    app: node-exporter
+  type: ClusterIP
+---
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: node-exporter
+  namespace: prod-monitoring
+spec:
+  template:
+    metadata:
+      labels:
+        app: node-exporter
+      name: node-exporter
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+      - image: prom/node-exporter
+        name: node-exporter
+        ports:
+        - containerPort: 9100
+          hostPort: 9100
+          name: scrape
+        volumeMounts:
+        # These mountPaths are referred by
+        #   - prometheus-rules/low-disk-space.rules
+        #   - grafana-dashboards
+        - name: data-disk
+          mountPath: /data-disk
+          readOnly: true
+        - name: root-disk
+          mountPath: /root-disk
+          readOnly: true
+      volumes:
+        - name: data-disk
+          hostPath:
+            path: /localdata
+        - name: root-disk
+          hostPath:
+            path: /
+      hostNetwork: true
+      hostPID: true

@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-svc
+  namespace: prod-monitoring
+  annotations:
+    prometheus.io/scrape: 'true'
+  labels:
+    name: prometheus-svc # ! DO NOT USE prometheus as a name: https://github.com/kubernetes/kubernetes/issues/25573
+    kubernetes.io/name: "Prometheus"
+spec:
+  selector:
+    app: prometheus
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9090
+    nodePort: 30002
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: prometheus
+  namespace: prod-monitoring
+  labels:
+    name: prometheus-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+      - name: prometheus
+        image: quay.io/coreos/prometheus:latest
+        args:
+        - "-config.file=/etc/prometheus/prometheus.yml"
+        - "-storage.local.path=/prometheus"
+        - "-storage.local.retention=6h"
+        - "-storage.local.memory-chunks=524288"
+        - '-alertmanager.url=http://alertmanager/alertmanager'
+        - '-web.external-url=https://prometheus.cotoa.me'
+        ports:
+        - protocol: TCP
+          containerPort: 9090
+        volumeMounts:
+        - name: data
+          mountPath: /prometheus
+        - name: config-volume
+          mountPath: /etc/prometheus
+        - name: rules-volume
+          mountPath: /etc/prometheus-rules
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1500Mi
+          limits:
+            cpu: 500m
+            memory: 2500Mi
+      volumes:
+      - name: data
+        emptyDir: {}
+      - name: config-volume
+        configMap:
+          name: prometheus
+      - name: rules-volume
+        configMap:
+          name: prometheus-rules
