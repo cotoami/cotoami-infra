@@ -29,7 +29,7 @@ resource "aws_elb" "alertmanager" {
     instance_protocol = "http"
     lb_port = 443
     lb_protocol = "https"
-    ssl_certificate_id = "${module.environment.ssl_certificate_id}"
+    ssl_certificate_id = "${module.environment.ssl_certificate_wildcard_id}"
   }
   health_check {
     healthy_threshold = 3
@@ -63,7 +63,7 @@ resource "aws_elb" "prometheus" {
     instance_protocol = "http"
     lb_port = 443
     lb_protocol = "https"
-    ssl_certificate_id = "${module.environment.ssl_certificate_id}"
+    ssl_certificate_id = "${module.environment.ssl_certificate_wildcard_id}"
   }
   health_check {
     healthy_threshold = 3
@@ -97,7 +97,7 @@ resource "aws_elb" "grafana" {
     instance_protocol = "http"
     lb_port = 443
     lb_protocol = "https"
-    ssl_certificate_id = "${module.environment.ssl_certificate_id}"
+    ssl_certificate_id = "${module.environment.ssl_certificate_wildcard_id}"
   }
   health_check {
     healthy_threshold = 3

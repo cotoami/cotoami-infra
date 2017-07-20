@@ -29,7 +29,7 @@ resource "aws_alb_listener" "cotoami_https" {
   port = "443"
   protocol = "HTTPS"
   ssl_policy = "ELBSecurityPolicy-2015-05"
-  certificate_arn = "arn:aws:acm:ap-northeast-1:207588786415:certificate/ad07312b-d416-4a53-8031-49e3ce78cd0f"
+  certificate_arn = "${module.environment.ssl_certificate_id}"
 
   default_action {
     target_group_arn = "${aws_alb_target_group.cotoami.arn}"
