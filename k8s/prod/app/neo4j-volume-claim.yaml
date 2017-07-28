@@ -9,4 +9,4 @@ spec:
   resources:
     requests:
       storage: 40Gi
-  storageClassName: ""  # disable dynamic provisioning
+  storageClassName: neo4j

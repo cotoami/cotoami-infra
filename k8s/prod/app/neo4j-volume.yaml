@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: ebs-volume
+  name: neo4j-volume
   namespace: prod-app
   labels:
     type: amazonEBS
@@ -11,6 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
+  storageClassName: neo4j
   awsElasticBlockStore:
     volumeID: vol-05b933e3d2e1fe56a
     fsType: ext4
