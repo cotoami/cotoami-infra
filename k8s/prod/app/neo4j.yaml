@@ -17,7 +17,7 @@ spec:
     nodePort: 30101
 ---
 #
-# Neo4j bolt service for internal
+# Neo4j bolt service
 #
 apiVersion: v1
 kind: Service
@@ -27,9 +27,12 @@ metadata:
 spec:
   selector:
     app: neo4j
+  type: NodePort
   ports:
-  - port: 7687
+  - protocol: TCP
+    port: 7687
     targetPort: 7687
+    nodePort: 30102
 ---
 #
 # Neo4j deployment

@@ -77,15 +77,9 @@ resource "aws_security_group" "internal_service_elb" {
     Name = "k8s-internal-service-elb"
   }
   ingress {
-    from_port = 80
-    to_port = 80
-    protocol = "tcp"
-    cidr_blocks = ["${split(",", module.environment.authroized_cidr_blocks)}"]
-  }
-  ingress {
-    from_port = 443
-    to_port = 443
-    protocol = "tcp"
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
     cidr_blocks = ["${split(",", module.environment.authroized_cidr_blocks)}"]
   }
   egress {
