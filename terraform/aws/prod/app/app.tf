@@ -55,6 +55,7 @@ resource "aws_alb_target_group" "cotoami" {
 resource "aws_ebs_volume" "neo4j" {
   availability_zone = "ap-northeast-1c"
   size = 50
+  type = "gp2"
   tags {
     Name = "${module.environment.env_name}-cotoami-neo4j"
   }
