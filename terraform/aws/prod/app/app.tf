@@ -6,6 +6,11 @@ provider "aws" {
   region = "ap-northeast-1"
 }
 
+
+//
+// Cotoami app
+//
+
 resource "aws_alb" "cotoami" {
   name = "${module.environment.env_name}-cotoami"
   internal = false
@@ -52,11 +57,45 @@ resource "aws_alb_target_group" "cotoami" {
   }
 }
 
+
+//
+// Neo4j
+//
+
 resource "aws_ebs_volume" "neo4j" {
   availability_zone = "ap-northeast-1c"
   size = 50
   type = "gp2"
   tags {
     Name = "${module.environment.env_name}-cotoami-neo4j"
+  }
+}
+
+resource "aws_route53_record" "neo4j" {
+  zone_id = "${module.environment.zone_id}"
+  name = "neo4j.cotoa.me"
+  type = "CNAME"
+  ttl = "300"
+  records = ["${aws_elb.neo4j.dns_name}"]
+}
+
+resource "aws_elb" "neo4j" {
+  name = "${module.environment.env_name}-neo4j"
+  cross_zone_load_balancing = true
+  subnets = ["${split(",", module.environment.subnets)}"]
+  security_groups = ["${module.environment.sg_internal_service_elb}"]
+  listener {
+    instance_port = 30101
+    instance_protocol = "http"
+    lb_port = 443
+    lb_protocol = "https"
+    ssl_certificate_id = "${module.environment.ssl_certificate_wildcard_id}"
+  }
+  health_check {
+    healthy_threshold = 3
+    unhealthy_threshold = 2
+    timeout = 10
+    target = "HTTP:30101/db/data/"
+    interval = 30
   }
 }

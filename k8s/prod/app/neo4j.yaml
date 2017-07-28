@@ -1,0 +1,67 @@
+#
+# Neo4j http service
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo4j-http
+  namespace: prod-app
+spec:
+  selector:
+    app: neo4j
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 7474
+    targetPort: 7474
+    nodePort: 30101
+---
+#
+# Neo4j bolt service for internal
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo4j-bolt
+  namespace: prod-app
+spec:
+  selector:
+    app: neo4j
+  ports:
+  - port: 7687
+    targetPort: 7687
+---
+#
+# Neo4j deployment
+#
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: neo4j
+  namespace: prod-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: neo4j
+    spec:
+      containers:
+      - name: neo4j
+        image: neo4j:3.2.2
+        resources:
+          requests:
+            memory: 1000Mi
+        ports:
+        - containerPort: 7474
+        - containerPort: 7687
+        volumeMounts:
+        - name: data-volume
+          mountPath: /data
+        env:
+        - name: NEO4J_AUTH
+          value: none
+      volumes:
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: neo4j-volume-claim
