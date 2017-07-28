@@ -82,6 +82,8 @@ spec:
             secretKeyRef:
               name: cotoami-secret
               key: repo_password
+        - name: COTOAMI_NEO4J_HOST
+          value: neo4j-bolt
         - name: COTOAMI_SMTP_SERVER
           value: email-smtp.us-east-1.amazonaws.com
         - name: COTOAMI_SMTP_PORT
