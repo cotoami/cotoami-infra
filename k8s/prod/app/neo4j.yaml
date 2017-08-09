@@ -1,3 +1,5 @@
+# ref. https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/
+
 #
 # Neo4j http service
 #
@@ -43,7 +45,8 @@ metadata:
   name: neo4j
   namespace: prod-app
 spec:
-  replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
