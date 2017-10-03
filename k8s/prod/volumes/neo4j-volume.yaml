@@ -1,0 +1,16 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: prod-neo4j-volume
+  labels:
+    type: amazonEBS
+spec:
+  capacity:
+    storage: 200Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: prod-neo4j
+  awsElasticBlockStore:
+    volumeID: vol-01822b2a6a6e5f87e
+    fsType: ext4

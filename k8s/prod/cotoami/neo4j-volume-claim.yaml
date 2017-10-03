@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: neo4j-volume-claim
+  namespace: prod-cotoami
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 180Gi
+  storageClassName: prod-neo4j

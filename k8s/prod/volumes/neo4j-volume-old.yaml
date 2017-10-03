@@ -2,7 +2,6 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: neo4j-volume
-  namespace: prod-app
   labels:
     type: amazonEBS
 spec:
