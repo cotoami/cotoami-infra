@@ -1,5 +1,5 @@
 module "environment" {
-  source = "../"
+  source = "../../"
 }
 
 provider "aws" {

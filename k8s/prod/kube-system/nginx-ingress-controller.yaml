@@ -8,10 +8,16 @@ spec:
     k8s-app: nginx-ingress-controller
   type: NodePort
   ports:
-  - protocol: TCP
+  - name: http
+    protocol: TCP
     port: 80
     targetPort: 80
     nodePort: 30301
+  - name: healthz
+    protocol: TCP
+    port: 10254
+    targetPort: 10254
+    nodePort: 30302
 ---
 # source: https://github.com/kubernetes/ingress/blob/master/examples/deployment/nginx/nginx-ingress-controller.yaml
 apiVersion: extensions/v1beta1
@@ -55,8 +61,7 @@ spec:
         ports:
         - containerPort: 80
           hostPort: 80
-        - containerPort: 443
-          hostPort: 443
+        - containerPort: 10254
         env:
           - name: POD_NAME
             valueFrom:
