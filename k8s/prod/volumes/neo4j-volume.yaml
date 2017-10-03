@@ -12,5 +12,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: prod-neo4j
   awsElasticBlockStore:
-    volumeID: vol-01822b2a6a6e5f87e
+    volumeID: vol-04878c8ca8e22e806
     fsType: ext4
