@@ -5,9 +5,7 @@ metadata:
   namespace: kube-system
 data:
   X-Cotoami-Message: "Hello"
-  X-Cotoami-X-Forwarded-For: ${http_x_forwarded_for}
-  X-Cotoami-Remote-Addr: ${remote_addr}
-  X-Cotoami-Realip-Remote-Addr: ${realip_remote_addr}
+  X-Cotoami-User-Addr: ${remote_addr}
 ---
 apiVersion: v1
 kind: ConfigMap
