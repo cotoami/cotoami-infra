@@ -20,14 +20,14 @@ resource "aws_alb" "cotoami" {
 
 resource "aws_alb_target_group" "cotoami" {
   name = "${module.environment.env_name}-cotoami-ingress"
-  port = 30301
+  port = 80
   protocol = "HTTP"
   vpc_id = "${module.environment.vpc_id}"
 
   health_check {
     interval = 30
     path = "/healthz"
-    port = 30302
+    port = 10254
     timeout = 20
     healthy_threshold = 3
     unhealthy_threshold = 2
