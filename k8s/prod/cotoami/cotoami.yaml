@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cotoami
-  namespace: prod-app
+  namespace: prod-cotoami
 spec:
   selector:
     app: cotoami
@@ -17,7 +17,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: cotoami
-  namespace: prod-app
+  namespace: prod-cotoami
 spec:
   replicas: 1
   template:
@@ -50,7 +50,7 @@ spec:
         ports:
         - containerPort: 4000
         env:
-        - name: INCREMENT_THIS_TO_FORCE_UPDATE
+        - name: CHANGE_THIS_TO_FORCE_UPDATE
           value: "1"
         - name: COTOAMI_URL_SCHEME
           value: https
@@ -68,10 +68,7 @@ spec:
               name: cotoami-secret
               key: repo_host
         - name: COTOAMI_REPO_DATABASE
-          valueFrom:
-            secretKeyRef:
-              name: cotoami-secret
-              key: repo_database
+          value: cotoami_main
         - name: COTOAMI_REPO_USER
           valueFrom:
             secretKeyRef:
@@ -98,3 +95,7 @@ spec:
             secretKeyRef:
               name: cotoami-secret
               key: smtp_password
+        - name: COTOAMI_OWNER_EMAILS
+          value: "daisuke.marubinotto@gmail.com"
+        - name: COTOAMI_SIGNUP_ENABLED
+          value: "true"
