@@ -67,6 +67,8 @@ spec:
         env:
         - name: NEO4J_AUTH
           value: none
+        - name: NEO4J_dbms_memory_heap_maxSize
+          value: "1024"
       volumes:
       - name: data-volume
         persistentVolumeClaim:
