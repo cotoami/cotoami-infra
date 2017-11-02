@@ -10,12 +10,12 @@ ALERT ProdNodeSwapUsage
   }
 
 ALERT ProdNodeMemoryUsage
-  IF (((node_memory_MemTotal-node_memory_MemFree-node_memory_Cached)/(node_memory_MemTotal)*100)) > 75
+  IF (((node_memory_MemTotal-node_memory_MemFree-node_memory_Cached)/(node_memory_MemTotal)*100)) > 90
   FOR 2m
   LABELS {
     severity="page"
   }
   ANNOTATIONS {
     SUMMARY = "{{$labels.instance}}: High memory usage detected",
-    DESCRIPTION = "{{$labels.instance}}: Memory usage is above 75% (current value is: {{ $value }})"
+    DESCRIPTION = "{{$labels.instance}}: Memory usage is above 90% (current value is: {{ $value }})"
   }
