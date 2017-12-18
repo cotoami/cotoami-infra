@@ -52,6 +52,11 @@ spec:
         env:
         - name: CHANGE_THIS_TO_FORCE_UPDATE
           value: "1"
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: cotoami-secret
+              key: secret_key_base
         - name: COTOAMI_URL_SCHEME
           value: https
         - name: COTOAMI_URL_HOST
